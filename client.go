@@ -160,9 +160,9 @@ func httpStatusHint(resp *http.Response) string {
 func safeTransportCause(err error) error {
 	if deferred, ok := errors.AsType[interface {
 		error
-		GitHubReadDeferral() string
+		GitHubReadDeferral()
 	}](err); ok {
-		return errors.New(deferred.GitHubReadDeferral())
+		return deferred
 	}
 	switch {
 	case errors.Is(err, context.Canceled):
